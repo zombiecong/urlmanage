@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+input{
+  display: block;
+  width: 300px;
+}
+
+.login_input{
+  text-align: center;
+}
+
+textarea{
+  display: block;
+  width: 300px;
+  height: 100px;
+}
+
+#content{
+    margin:0 auto;
+    width:300px;
+    text-align:center;
+}
+
+li{
+    list-style-type:none;
+}
+
+.red{
+  color: red;
+}

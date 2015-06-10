@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    if user
+        a(href="/logout")= '注销'
+        br
+        a(href="/addUrl")= '增加链接'
+    h1 aaaa
+    ul
+      each url in urls
+        li
+          a(href="#{url.link}")= url.content
+          if user
+            a(href="/delete/#{url._id}")= '删除'

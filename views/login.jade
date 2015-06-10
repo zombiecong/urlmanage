@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    while message = flash.shift() 
+      p.red= message.message
+    h1 登录
+    form(method='post') 
+        input.login_input(
+          name='username'
+          placeholder='用户名'
+        )
+        br  
+        input.login_input(
+          name='password'
+          type='password'
+          placeholder='密码'
+        )
+        br
+        button 提交

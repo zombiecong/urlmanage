@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 添加链接
+    form(method='post') 
+        input(
+          name='link'
+          placeholder='链接'
+        )
+        br  
+        textarea(
+          name='content'
+          placeholder='内容'
+        )
+        br
+        button 提交
