@@ -8,7 +8,7 @@ var User = require('../models/user.js');
 function checkLogin(req,res,next){
     if(!req.session.user){
         req.flash('error','未登录');
-        res.redirect('/login');
+        return res.redirect('/login');
     }
     next();
 }
@@ -16,7 +16,7 @@ function checkLogin(req,res,next){
 function checkNotLogin(req,res,next){
     if(req.session.user){
         req.flash('error','已登录');
-        res.redirect('back')
+        return res.redirect('back')
     }
     next()
 }
