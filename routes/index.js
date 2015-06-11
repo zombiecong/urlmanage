@@ -35,10 +35,12 @@ router.get('/', function(req, res, next) {
 });
 
 /*edit title*/
+router.get('/editTitle', checkLogin);
 router.get('/editTitle', function(req, res) {
     res.render('editTitle')
 });
 
+router.post('/editTitle', checkLogin);
 router.post('/editTitle', function(req, res) {
     newMeta = new Meta({
         key : req.body.key,
@@ -109,6 +111,7 @@ router.post('/login',function(req, res ){
 });
 
 //register
+/*
 router.get('/register', function(req, res) {
     res.render('register');
 });
@@ -153,8 +156,9 @@ router.post('/register', function(req, res) {
         });
     });
 })
-
+*/
 //登出
+router.get('/logout', checkNotLogin);
 router.get('/logout', function (req, res) {
   req.session.user = null;
   req.flash('success', '登出成功!');
