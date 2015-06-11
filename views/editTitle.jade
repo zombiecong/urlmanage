@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 修改标题
+    form(method='post') 
+        input.login_input(
+          name='value'
+          placeholder='标题'
+        )
+        input(
+            type='hidden'
+            name='key'
+            value='title'
+        )
+        br  
+        button 提交

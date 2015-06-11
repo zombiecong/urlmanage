@@ -5,7 +5,9 @@ block content
         a(href="/logout")= '注销'
         br
         a(href="/addUrl")= '增加链接'
-    h1 aaaa
+        br
+        a(href='/editTitle') 修改标题
+    h1= meta.value
     ul
       each url in urls
         li

@@ -4,6 +4,7 @@ var crypto = require('crypto');
 
 var Url = require('../models/url.js');
 var User = require('../models/user.js');
+var Meta = require('../models/meta.js');
 
 function checkLogin(req,res,next){
     if(!req.session.user){
@@ -22,13 +23,33 @@ function checkNotLogin(req,res,next){
 }
 /*URL list*/
 router.get('/', function(req, res, next) {
-    Url.get(function(err,docs){
-        res.render('urlList', {
-            urls : docs,
-            user : req.session.user
+    Url.get(function(err,urls){
+        Meta.get('title',function(err,meta){
+            res.render('urlList', {
+                urls : urls,
+                user : req.session.user,
+                meta : meta
+            });
         });
     });
 });
+
+/*edit title*/
+router.get('/editTitle', function(req, res) {
+    res.render('editTitle')
+});
+
+router.post('/editTitle', function(req, res) {
+    newMeta = new Meta({
+        key : req.body.key,
+        value : req.body.value
+    });
+
+    newMeta.save(function(err,doc){
+        res.redirect("/");
+    });
+});
+
 
 /*add URL*/
 router.get('/addUrl', checkLogin);
