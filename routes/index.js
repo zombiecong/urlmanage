@@ -158,7 +158,7 @@ router.post('/register', function(req, res) {
 })
 */
 //登出
-router.get('/logout', checkNotLogin);
+// router.get('/logout', checkNotLogin);
 router.get('/logout', function (req, res) {
   req.session.user = null;
   req.flash('success', '登出成功!');
