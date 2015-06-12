@@ -26,9 +26,9 @@ User.prototype.save = function(callback) {
 };
 
 //get
-User.get = function(name , callback){
+User.get = function(id , callback){
     var users = db.get('users');
-    users.findOne({ name: name },function(err,doc){
+    users.findOne({ _id: id },function(err,doc){
         if (err) {
           return callback(err);//失败！返回 err 信息
         }
