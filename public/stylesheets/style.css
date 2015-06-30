@@ -13,13 +13,14 @@ a {
 
 input{
   display: block;
-  width: 300px;
+  width: 100%;
   border-radius: 5px;
 }
 
 .login_input{
   text-align: center;
 }
+
 
 textarea{
   display: block;
@@ -30,7 +31,7 @@ textarea{
 
 #content{
     margin:0 auto;
-    width:300px;
+    width:600px;
     text-align:center;
 }
 
@@ -40,4 +41,8 @@ li{
 
 .red{
   color: red;
+}
+
+#epiceditor{
+  height:500px;
 }

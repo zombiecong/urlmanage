@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    if user
+        a(href='/editMain') 修改主要内容
+        br
+        a(href='/logout') 登出
+    !=mainContent

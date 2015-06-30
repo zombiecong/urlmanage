@@ -1,0 +1,64 @@
+extends layout
+
+block content
+    h1 增加内容
+    div#epiceditor
+    br
+    button.btn.btn-default#addMainButton(type='button') 提交
+    
+    script(type="text/javascript" src='http://cdn.bootcss.com/jquery/2.1.4/jquery.js')
+    script(type="text/javascript" src='/javascripts/epiceditor.js')
+    script.
+        var opts = {
+          container: 'epiceditor',
+          textarea: null,
+          basePath: 'epiceditor',
+          clientSideStorage: true,
+          localStorageName: 'epiceditor',
+          useNativeFullscreen: true,
+          parser: marked,
+          file: {
+            name: 'epiceditor',
+            defaultContent: '',
+            autoSave: 100
+          },
+          theme: {
+            base: '/themes/base/epiceditor.css',
+            preview: '/themes/preview/preview-dark.css',
+            editor: '/themes/editor/epic-dark.css'
+          },
+          button: {
+            preview: true,
+            fullscreen: true,
+            bar: "auto"
+          },
+          focusOnLoad: false,
+          shortcut: {
+            modifier: 18,
+            fullscreen: 70,
+            preview: 80
+          },
+          string: {
+            togglePreview: 'Toggle Preview Mode',
+            toggleEdit: 'Toggle Edit Mode',
+            toggleFullscreen: 'Enter Fullscreen'
+          },
+          autogrow: false
+        }
+        var editor = new EpicEditor(opts)
+        editor.load();
+        
+        $('#addMainButton').click(function(){
+            var content = editor.getElement('editor').body.innerHTML
+            $.ajax({
+               url:'/addMain',
+               type:'POST',
+               data:{content : content},
+               success:function(msg){
+                    alert(msg)
+               },
+               error:function(msg){
+                    alert(msg)
+               }         
+            });
+        });

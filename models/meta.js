@@ -13,7 +13,7 @@ Meta.prototype.save = function(callback) {
         value : this.value
     };
     var metas = db.get('metas');
-    metas.update({key: 'title'}, {$set: meta},function(err,doc){
+    metas.insert(meta,function(err,doc){
         if(err) throw err;
         callback()
     });
@@ -28,3 +28,18 @@ Meta.get = function(key ,callback) {
         callback(null, doc);//成功！返回查询的用户信息
     });
 }
+
+
+
+Meta.update = function(value,callback) {
+    var meta = {
+        key : 'content',
+        value : value
+    };
+
+    var metas = db.get('metas');
+    metas.update({key: 'content'}, meta,function(err,doc){
+        if(err) throw err;
+        callback()
+    });
+};

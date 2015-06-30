@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
+var markdown = require('markdown').markdown;
 
 var Url = require('../models/url.js');
 var User = require('../models/user.js');
@@ -23,16 +24,53 @@ function checkNotLogin(req,res,next){
 }
 /*URL list*/
 router.get('/', function(req, res, next) {
-    Url.get(function(err,urls){
-        Meta.get('title',function(err,meta){
-            res.render('urlList', {
-                urls : urls,
-                user : req.session.user,
-                meta : meta
-            });
+
+    Meta.get('content',function(err,meta){
+        res.render('index', {
+            mainContent : markdown.toHTML(meta.value),
+            user : req.session.user
         });
     });
+
 });
+
+
+/*add content*/
+router.get('/addMain', checkLogin);
+router.get('/addMain', function(req, res) {
+    res.render('addMain');
+});
+
+router.post('/addMain', checkLogin);
+router.post('/addMain', function(req, res) {
+    var content = req.body.content;
+    newMeta = new Meta({
+        key : 'content',
+        value : content  
+    });
+    newMeta.save(function(err,doc){
+        res.send('ok');
+    });
+});
+
+
+/*edit content*/
+
+router.get('/editMain', checkLogin);
+router.get('/editMain', function(req, res) {
+    Meta.get('content',function(err,meta){
+        res.render('editMain',{content:meta.value});
+    });
+});
+
+router.post('/editMain', checkLogin);
+router.post('/editMain', function(req, res) {
+    var content = req.body.content;
+    Meta.update(content,function(err,doc){
+        res.send('ok');
+    });
+});
+
 
 /*edit title*/
 router.get('/editTitle', checkLogin);
