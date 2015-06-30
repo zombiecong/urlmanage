@@ -44,7 +44,12 @@ block content
                type:'POST',
                data:{content : content},
                success:function(msg){
-                    alert(msg)
+                    if(msg == 'ok'){
+                       window.location.href="/"; 
+                    }else{
+                      alert(msg)
+                    }
+                    
                },
                error:function(msg){
                     alert(msg)
